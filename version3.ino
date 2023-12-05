@@ -191,12 +191,15 @@ void loop() { // run over and over
             motor2.run(FORWARD);
             Obstacle_Check();
               if (distance < 100) {
-                Stop();
+                motor2.run(RELEASE);
+                motor1.run(RELEASE);
                 delay(50);
+                ms=mySerial.readStringUntil('c');
+                b=ms.toInt();
              }
         }
 
-    if(cnt1 == 1) {
+    else if(cnt1 == 1) {
             Distance_Measurement();
             Serial.println(distance);
             if(distance < 200) {
@@ -269,6 +272,4 @@ void Obstacle_Check() {
     Serial.println("test1");
     Serial.println(distance);
     Serial.println("test2");
-
-
 }
