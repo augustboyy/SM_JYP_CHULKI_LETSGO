@@ -117,6 +117,7 @@ void loop() { // run over and over
             
             motor1.run(FORWARD);
             motor2.run(FORWARD);
+            Obstacle_Check();
         }
 
         else if(b==11){
@@ -162,7 +163,7 @@ void loop() { // run over and over
             cnt1 = 0;
         }
 
-        else if(b == 13) {
+        /*else if(b == 13) {
 
             cnt2 = 1;
         }
@@ -175,7 +176,7 @@ void loop() { // run over and over
         else if(b == 14) {
 
             cnt = 0;
-        }
+        }*/
     }
 }
 
