@@ -20,7 +20,7 @@ int dL, dR;
 int Lspeed = 115;        //좌측 모터 속도
 int Rspeed = 400;        //우측 모터 속도
 
-int cnt;
+int cnt1, cnt2;
 
 void Obstacle_Check();
 void Distance_Measurement();
@@ -121,6 +121,10 @@ void loop() { // run over and over
 
         else if(b==11){
             
+            cnt1 = 1;
+        }
+
+        if(cnt1 == 1) {
             Distance_Measurement();
 
             if(distance < 200) {
@@ -153,17 +157,22 @@ void loop() { // run over and over
             }
         }
 
-        else if(b == 12) {
+         else if(b == 12) {
 
-            cnt = 1;
+            cnt1 = 0;
         }
 
-        if(cnt == 1){
+        else if(b == 13) {
+
+            cnt2 = 1;
+        }
+
+        if(cnt2 == 1){
 
             Obstacle_Check();
         }
 
-        else if(b == 13) {
+        else if(b == 14) {
 
             cnt = 0;
         }
