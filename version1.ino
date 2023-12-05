@@ -150,6 +150,21 @@ void loop() { // run over and over
                 Forward();
             }
         }
+
+        else if(b == 12) {
+
+            cnt = 1;
+        }
+
+        if(cnt == 1){
+
+            Obstacle_Check();
+        }
+
+        else if(b == 13) {
+
+            cnt = 0;
+        }
     }
 }
 
@@ -185,4 +200,17 @@ void Left() {
 void Stop() {
   motor_L.run(RELEASE);       motor_R.run(RELEASE);
   motor_L.setSpeed(0);  motor_R.setSpeed(0);
+}
+
+void Obstacle_Check() {
+  Distance_Measurement();
+  delay(50);
+  
+  Serial.println(distance);
+
+  if (distance < 100) {
+      Stop();
+      delay(50);
+    
+  }
 }
