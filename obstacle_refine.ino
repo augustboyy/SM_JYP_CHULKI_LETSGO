@@ -13,7 +13,7 @@
 #include <SoftwareSerial.h>
 #include <AFMotor.h>
 AF_DCMotor motor_L(1);            
-AF_DCMotor motor_R(3); 
+AF_DCMotor motor_R(4); 
 
 #define BT_RXD A5
 #define BT_TXD A4
@@ -25,13 +25,13 @@ bool rec_chk = false;
 int i;
 int j;
 
+int Lspeed=200;
+int Rspeed=170;
+
 //초음파센서 출력핀(trig)과 입력핀(echo) 설정
 int trigPin = A0;
 int echoPin = A1;
 long duration, distance;
-
-int Lspeed = 170;        //좌측 모터 속도
-int Rspeed = 200;
 
 void setup(){
   Serial.begin(9600);              // PC와의 시리얼 통신속도
@@ -75,9 +75,6 @@ void Right() {
 void Left() {
   motor_L.run(BACKWARD);  motor_R.run(FORWARD);
   motor_L.setSpeed(Lspeed*0.5);  motor_R.setSpeed(Rspeed);
-  delay(1000);
-  motor_L.run(FORWARD);  motor_R.run(FORWARD);
-  motor_L.setSpeed(Lspeed);  motor_R.setSpeed(Rspeed);
 
 }
 void Stop() {
@@ -87,27 +84,14 @@ void Stop() {
 
 ///////////장애물 확인 및 회피 방향 결정///////////
 void Obstacle_Check() {
-  int val = random(2);
   Distance_Measurement();
   delay(50);
   
   Serial.println(distance);
 
-  while (distance < 300) {
+  if (distance < 100) {
       Stop();
       delay(50);
-      Distance_Measurement();
-      delay(100);
-      if (val == 0) {
-        Right();
-        delay(400);
-      }
-      else if (val == 1) {
-        Left();
-        delay(400);
-      }
-      Distance_Measurement();
-      delay(100);
     
   }
 }
